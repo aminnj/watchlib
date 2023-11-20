@@ -84,6 +84,14 @@ class DataLoader(DataManager):
             logging.error("The health data path (Export.xml) doesnt exist")
             return {}
 
+    def load_health_data_consolidated(self) -> pd.DataFrame:
+        data = self.load_health_data()
+        df = pd.concat((df.assign(key=key) for (key, df) in data.items()), ignore_index=True)
+        categorical_cols = ["type", "sourceName", "sourceVersion", "unit", "key", "device"]
+        for col in categorical_cols:
+            df[col] = df[col].astype("category")
+        return df
+
     # ----------
     # ECG
     # ----------

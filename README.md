@@ -5,7 +5,11 @@ pip install git+https://github.com/aminnj/watchlib.git
 ```
 
 ```python
+# dict of key -> DataFrame
 data = watchlib.DataLoader("./apple_health_export").load_health_data()
+
+# single DataFrame with key as column
+df = watchlib.DataLoader("./apple_health_export").load_health_data_consolidated()
 ```
 
 ## Original README below
