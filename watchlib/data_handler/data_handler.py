@@ -60,21 +60,23 @@ class DataLoader(DataManager):
             data = {}
 
             # Init all arrays
-            for record in records:
-                data[record.get("type")] = []
+            keys = set(record.get("type") for record in records)
+            for key in keys:
+                data[key] = []
 
             logging.info(f"[Data Loader] Loading {len(data)} health dataframes")
 
             for record in records:
                 key = record.get("type")
-                key = self.get_identifier_name(key)
-                value = record.get("value")
-                time = record.get("creationDate")
-                data[key].append((time, value))
+                items = dict(record.items())
+                items["time"] = items.get("creationDate")
+                data[key].append(items)
 
             for key in data.keys():
-                df = pd.DataFrame(data[key], columns=["time", "value"])
-                df["time"] = pd.to_datetime(df["time"])
+                df = pd.DataFrame(data[key])
+                for col in df.columns:
+                    if col in ("time", "creationDate", "startDate", "endDate"):
+                        df[col] = pd.to_datetime(df[col])
                 data[key] = df
 
             return data
