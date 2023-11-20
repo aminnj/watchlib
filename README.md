@@ -1,3 +1,11 @@
+## Fork of https://github.com/marcjulianschwarz/watchlib
+
+```bash
+pip install git+https://github.com/aminnj/watchlib.git
+```
+
+## Original README below
+
 > **Important:** This package is now deprecated. See [watchml](https://github.com/marcjulianschwarz/watchml) for a newer and better version of watchlib. 
 
 
