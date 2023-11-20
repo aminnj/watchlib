@@ -4,6 +4,10 @@
 pip install git+https://github.com/aminnj/watchlib.git
 ```
 
+```python
+data = watchlib.DataLoader("./apple_health_export").load_health_data()
+```
+
 ## Original README below
 
 > **Important:** This package is now deprecated. See [watchml](https://github.com/marcjulianschwarz/watchml) for a newer and better version of watchlib. 
